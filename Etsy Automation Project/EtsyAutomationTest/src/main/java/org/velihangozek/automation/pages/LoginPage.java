@@ -3,6 +3,7 @@ package org.velihangozek.automation.pages;
 import org.velihangozek.automation.utils.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.velihangozek.automation.utils.WaitUtils;
 
 public class LoginPage {
 
@@ -18,7 +19,7 @@ public class LoginPage {
     private By submitButton = By.name("submit_attempt");
 
     public void login(String email, String password) {
-        driver.findElement(signInButton).click();
+        WaitUtils.clickWhenReady(driver, signInButton);
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(submitButton).click();

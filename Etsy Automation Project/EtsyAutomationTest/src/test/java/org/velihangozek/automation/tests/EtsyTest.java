@@ -1,23 +1,27 @@
 package org.velihangozek.automation.tests;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.velihangozek.automation.pages.HomePage;
 import org.velihangozek.automation.pages.LoginPage;
 import org.velihangozek.automation.utils.ConfigReader;
 import org.velihangozek.automation.utils.DriverManager;
-import org.junit.jupiter.api.*;
 
-public class EtsyTest {
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class EtsyTest extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
 
-    @BeforeAll
-    public static void setup() {
-        DriverManager.getDriver().get(ConfigReader.getProperty("baseURL"));
-    }
+    @Override
+    public void setupTest() {
+        super.setupTest(); // Call the BaseTest setup logic
 
-    @BeforeEach
-    public void initPages() {
+        // Initialize the test instance for Extent Reports
+        test = extent.createTest("EtsyTest: " + getClass().getSimpleName());
+
+        // Initialize the page objects
         loginPage = new LoginPage();
         homePage = new HomePage();
     }
@@ -25,24 +29,26 @@ public class EtsyTest {
     @Test
     @DisplayName("Test Login Functionality")
     public void testLogin() {
+        test.info("Starting Login Test"); // Log step to Extent Reports
         loginPage.login(ConfigReader.getProperty("username"), ConfigReader.getProperty("password"));
-        Assertions.assertTrue(DriverManager.getDriver().getTitle().contains("Etsy"), "User is not logged in");
+        String pageTitle = DriverManager.getDriver().getTitle();
+        test.info("Page title after login: " + pageTitle);  // Log additional details
+        assertTrue(pageTitle.contains("Etsy"), "Login failed: Etsy title does not match.");
+        test.pass("Login Test Passed");  // Mark test as passed in Extent Reports
     }
 
     @Test
     @DisplayName("Test Product Search")
     public void testSearchProduct() {
-        homePage.searchProduct("handmade necklace");
-        Assertions.assertTrue(DriverManager.getDriver().getPageSource().contains("handmade"));
-    }
+        String productName = "handmade necklace";
+        test.info("Searching for product: " + productName);
+        homePage.searchProduct(productName);
 
-    @AfterEach
-    public void tearDown() {
-        DriverManager.getDriver().manage().deleteAllCookies();
-    }
+        boolean isProductFound = DriverManager.getDriver().getPageSource().contains("handmade");
+        test.info("Search result contains 'handmade': " + isProductFound);
 
-    @AfterAll
-    public static void cleanup() {
-        DriverManager.closeDriver();
+        assertTrue(isProductFound, "Search failed: 'handmade' keyword not found in the page source.");
+        test.pass("Product Search Test Passed");
+
     }
 }
