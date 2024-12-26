@@ -1,5 +1,6 @@
 package org.velihangozek.automation.tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.velihangozek.automation.pages.HomePage;
@@ -15,11 +16,12 @@ public class EtsyTest extends BaseTest {
     private HomePage homePage;
 
     @Override
+    @BeforeEach
     public void setupTest() {
         super.setupTest(); // Call the BaseTest setup logic
-
+        System.out.println("EtsyTest-specific setup logic...");
         // Initialize the test instance for Extent Reports
-        test = extent.createTest("EtsyTest: " + getClass().getSimpleName());
+        test = extent.createTest("EtsyTest: Test - " + getClass().getSimpleName());
 
         // Initialize the page objects
         loginPage = new LoginPage();
@@ -30,7 +32,7 @@ public class EtsyTest extends BaseTest {
     @DisplayName("Test Login Functionality")
     public void testLogin() {
         test.info("Starting Login Test"); // Log step to Extent Reports
-        loginPage.login(ConfigReader.getProperty("username"), ConfigReader.getProperty("password"));
+        loginPage.login(ConfigReader.getProperty("username"), ConfigReader.getProperty("password"));4
         String pageTitle = DriverManager.getDriver().getTitle();
         test.info("Page title after login: " + pageTitle);  // Log additional details
         assertTrue(pageTitle.contains("Etsy"), "Login failed: Etsy title does not match.");

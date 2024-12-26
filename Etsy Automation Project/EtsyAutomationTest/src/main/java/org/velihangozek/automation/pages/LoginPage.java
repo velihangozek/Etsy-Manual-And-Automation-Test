@@ -13,12 +13,13 @@ public class LoginPage {
         this.driver = DriverManager.getDriver();
     }
 
-    private By signInButton = By.xpath("//button[contains(text(),'Sign in')]");
+    private By signInButton = By.xpath("//button[normalize-space(text())='Sign in' and contains(@class,'signin-header-action')]");
     private By emailField = By.id("join_neu_email_field");
     private By passwordField = By.id("join_neu_password_field");
     private By submitButton = By.name("submit_attempt");
 
     public void login(String email, String password) {
+
         WaitUtils.clickWhenReady(driver, signInButton);
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);

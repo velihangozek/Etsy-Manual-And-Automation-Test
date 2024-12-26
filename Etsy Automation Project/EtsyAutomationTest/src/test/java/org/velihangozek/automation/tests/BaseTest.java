@@ -32,7 +32,8 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setupTest() {
-        // This can include login or setup specific to each test if required
+        System.out.println("BaseTest setup logic running...");
+        // Base setup logic, like initializing WebDriver
     }
 
     @AfterEach
