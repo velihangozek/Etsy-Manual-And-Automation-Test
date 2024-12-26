@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.velihangozek.automation.tests.EtsyTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec <<< FAILURE!
+org.velihangozek.automation.tests.EtsyTest.testLogin()  Time elapsed: 0.007 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.velihangozek.automation.utils.ConfigReader.getProperty(ConfigReader.java:22)
+	at org.velihangozek.automation.tests.EtsyTest.testLogin(EtsyTest.java:28)
+
+org.velihangozek.automation.tests.EtsyTest.testSearchProduct()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.velihangozek.automation.tests.EtsyTest.testSearchProduct(EtsyTest.java:35)
+
