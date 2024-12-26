@@ -1,6 +1,0 @@
-org\velihangozek\Main.class
-org\velihangozek\automation\utils\DriverManager.class
-org\velihangozek\automation\pages\HomePage.class
-org\velihangozek\automation\pages\LoginPage.class
-org\velihangozek\automation\pages\ProductPage.class
-org\velihangozek\automation\utils\ConfigReader.class
